@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card max-width="500px" class="mx-auto">
     <v-toolbar flat>
       <v-btn
         text
@@ -7,7 +7,7 @@
         :to="{name: 'users'}">
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
-      <v-toolbar-title>User {{user_id}}</v-toolbar-title>
+      <v-toolbar-title>{{user ? user.name : 'User'}}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
         text
@@ -20,7 +20,17 @@
     <v-divider />
 
     <template v-if="user">
+
       <v-card-text>
+        <v-img
+          max-height="40vh"
+          contain
+          :src="image_src" />
+      </v-card-text>
+
+
+
+      <!-- <v-card-text>
         <v-row>
           <v-col>
             Name: {{user.name}}
@@ -31,7 +41,7 @@
             Encoding: {{!!user.face_encoding}}
           </v-col>
         </v-row>
-      </v-card-text>
+      </v-card-text> -->
     </template>
 
     <v-card-text
@@ -107,6 +117,9 @@
     computed: {
       user_id(){
         return this.$route.params.user_id
+      },
+      image_src(){
+        return `${process.env.VUE_APP_API_URL}/users/${this.user_id}/image`
       }
     }
   }

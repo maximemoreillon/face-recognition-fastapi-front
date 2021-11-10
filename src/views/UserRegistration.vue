@@ -28,7 +28,9 @@
           <v-col cols="auto">
             <v-btn
               :loading="processing"
-              type="submit">Create</v-btn>
+              type="submit">
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
           </v-col>
         </v-row>
 

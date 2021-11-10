@@ -19,12 +19,24 @@
 
       </v-btn>
     </v-toolbar>
+    <v-divider/>
+    
     <v-card-text>
       <v-data-table
         :loading="loading"
         :headers="headers"
         :items="users"
         @click:row="row_clicked($event)">
+
+        <template v-slot:item.image="{ item }">
+        <v-img
+          width="6em"
+          height="6em"
+          contain
+          :src="image_src(item)" />
+      </template>
+
+
       </v-data-table>
 
     </v-card-text>
@@ -42,6 +54,7 @@
         loading: false,
         users: [],
         headers: [
+          {text:'Image', value: 'image'},
           {text:'Name', value: 'name'}
         ]
       }
@@ -72,6 +85,9 @@
       },
       row_clicked(user){
         this.$router.push({name: 'user', params: {user_id: user._id.$oid}})
+      },
+      image_src(user){
+        return `${process.env.VUE_APP_API_URL}/users/${user._id.$oid}/image`
       }
     }
   }

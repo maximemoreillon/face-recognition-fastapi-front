@@ -4,6 +4,7 @@
       app
       color="primary"
       dark>
+      <v-toolbar-title>Face recognition user management</v-toolbar-title>
 
     </v-app-bar>
 

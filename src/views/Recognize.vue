@@ -23,7 +23,9 @@
           <v-col cols="auto">
             <v-btn
               :loading="processing"
-              type="submit">Create</v-btn>
+              type="submit">
+              <v-icon>mdi-face-recognition</v-icon>
+            </v-btn>
           </v-col>
         </v-row>
 
@@ -58,8 +60,15 @@
           })
           .catch( (error) => {
 
-            if(error.response) console.error(error.response.data)
-            else console.error(error)
+            if(error.response) {
+              console.error(error.response.data)
+              alert(error.response.data.detail || error.response.data)
+
+            }
+            else {
+              console.error(error)
+              alert(error)
+            }
 
           })
           .finally( () => {
