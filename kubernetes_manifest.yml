@@ -58,5 +58,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: camera-viewer
+          serviceName: ${K8S_INGRESS_HOST}
           servicePort: 80
