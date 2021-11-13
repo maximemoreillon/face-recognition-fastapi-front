@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ROOT_DIR=/app
+ROOT_DIR=/app/dist
 
 # Replace env vars in files served by NGINX
 echo "Replacing environment variables"
@@ -9,8 +9,6 @@ do
   echo "Processing $file ...";
 
   sed -i 's|VUE_APP_API_URL_PLACEHOLDER|'${VUE_APP_API_URL}'|g' $file
-
-  echo "VUE_APP_AUTHENTICATION_API_URL_PLACEHOLDER -> ${VUE_APP_AUTHENTICATION_API_URL}"
   sed -i 's|VUE_APP_AUTHENTICATION_API_URL_PLACEHOLDER|'${VUE_APP_AUTHENTICATION_API_URL}'|g' $file
 
 done
