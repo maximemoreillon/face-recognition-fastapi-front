@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ROOT_DIR=/app/dist
+ROOT_DIR=/usr/src/app/dist
 
 # Replace env vars in files served by NGINX
 echo "Replacing environment variables"
