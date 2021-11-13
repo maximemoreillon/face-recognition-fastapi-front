@@ -2,6 +2,7 @@ variables:
   APPLICATION_NAME: face-recognition-fastapi-front
   DOCKER_IMAGE: ${DOCKER_HUB_USERNAME}/${APPLICATION_NAME}
   NODEPORT: 30021
+  K8S_INGRESS_HOST: faces.home.maximemoreillon.com
 
 build:
   stage: build

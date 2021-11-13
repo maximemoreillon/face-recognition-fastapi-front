@@ -39,3 +39,24 @@ spec:
   ports:
   - port: 80
     nodePort: ${NODEPORT}
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ${APPLICATION_NAME}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod" # This is necessary, no idea why
+spec:
+  tls:
+  - hosts:
+    - ${K8S_INGRESS_HOST}
+    secretName: ${APPLICATION_NAME}
+  rules:
+  - host: ${K8S_INGRESS_HOST}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: camera-viewer
+          servicePort: 80
