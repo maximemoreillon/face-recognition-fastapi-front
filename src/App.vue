@@ -36,10 +36,11 @@ export default {
 
   data: () => ({
     options: {
+      skip_greetings: process.env.NODE_ENV === 'development',
       title: 'Face manager',
       authenticate: true,
-      login_url: `${process.env.VUE_APP_AUTHENTICATION_API_URL}/login`,
-      identification_url: `${process.env.VUE_APP_AUTHENTICATION_API_URL}/v2/whoami`,
+      login_url: process.env.VUE_APP_AUTHENTICATION_API_URL ? `${process.env.VUE_APP_AUTHENTICATION_API_URL}/login` : undefined,
+      identification_url: process.env.VUE_APP_AUTHENTICATION_API_URL ? `${process.env.VUE_APP_AUTHENTICATION_API_URL}/v2/whoami` : undefined,
     },
     nav: [
       {title: 'Home', to: {name: 'Home'}, icon: 'mdi-home'},
