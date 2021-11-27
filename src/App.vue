@@ -1,6 +1,6 @@
 <template>
   <AppTemplate
-    :options="options">
+    :options="template_options">
 
     <template v-slot:nav>
       <v-list
@@ -35,21 +35,35 @@ export default {
   },
 
   data: () => ({
-    options: {
-      skip_greetings: process.env.NODE_ENV === 'development',
-      title: 'Face manager',
-      authenticate: !!process.env.VUE_APP_AUTHENTICATION_API_URL,
-      login_url: process.env.VUE_APP_AUTHENTICATION_API_URL ? `${process.env.VUE_APP_AUTHENTICATION_API_URL}/login` : undefined,
-      identification_url: process.env.VUE_APP_AUTHENTICATION_API_URL ? `${process.env.VUE_APP_AUTHENTICATION_API_URL}/v2/whoami` : undefined,
-    },
+
     nav: [
       {title: 'Home', to: {name: 'Home'}, icon: 'mdi-home'},
       {title: 'About', to: {name: 'About'}, icon: 'mdi-information-outline'},
     ]
   }),
 
-  methods: {
+  computed:{
+    login_url(){
+      if(!process.env.VUE_APP_AUTHENTICATION_API_URL) return null
+      if(!process.env.VUE_APP_AUTHENTICATION_API_URL.length) return null
+      return `${process.env.VUE_APP_AUTHENTICATION_API_URL}/login`
+    },
+    identification_url(){
+      if(!process.env.VUE_APP_AUTHENTICATION_API_URL) return null
+      if(!process.env.VUE_APP_AUTHENTICATION_API_URL.length) return null
+      return `${process.env.VUE_APP_AUTHENTICATION_API_URL}/v2/whoami`
+    },
+    template_options(){
+      return {
+        skip_greetings: process.env.NODE_ENV === 'development',
+        title: 'Face recognition',
+        login_url: this.login_url,
+        identification_url: this.identification_url,
+      }
 
+    }
   }
+
+
 };
 </script>
