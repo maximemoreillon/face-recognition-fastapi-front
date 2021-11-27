@@ -38,7 +38,7 @@ export default {
     options: {
       skip_greetings: process.env.NODE_ENV === 'development',
       title: 'Face manager',
-      authenticate: true,
+      authenticate: !!process.env.VUE_APP_AUTHENTICATION_API_URL,
       login_url: process.env.VUE_APP_AUTHENTICATION_API_URL ? `${process.env.VUE_APP_AUTHENTICATION_API_URL}/login` : undefined,
       identification_url: process.env.VUE_APP_AUTHENTICATION_API_URL ? `${process.env.VUE_APP_AUTHENTICATION_API_URL}/v2/whoami` : undefined,
     },
