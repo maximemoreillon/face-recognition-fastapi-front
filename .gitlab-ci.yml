@@ -1,7 +1,6 @@
 variables:
   APPLICATION_NAME: face-recognition-fastapi-front
   DOCKER_IMAGE: ${DOCKER_HUB_USERNAME}/${APPLICATION_NAME}
-  NODEPORT: 30021
   K8S_INGRESS_HOST: faces.home.maximemoreillon.com
 
 image: moreillon/ci-dind
@@ -19,9 +18,6 @@ build:
     - docker build -t ${DOCKER_IMAGE} .
     # Pushing the image to the registry
     - docker push ${DOCKER_IMAGE}
-    # Cleanup
-    - docker image rm ${DOCKER_IMAGE}
-
 
 deploy:
   stage: deploy
