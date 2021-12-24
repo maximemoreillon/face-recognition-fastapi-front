@@ -4,10 +4,14 @@ variables:
   NODEPORT: 30021
   K8S_INGRESS_HOST: faces.home.maximemoreillon.com
 
+image: moreillon/ci-dind
+services:
+  - name: docker:19.03.12-dind
+
 build:
   stage: build
   tags:
-    - moreillon
+    - dind
   script:
     # Docker hub login
     - echo "${DOCKER_HUB_PASSWORD}" | docker login --username ${DOCKER_HUB_USERNAME} --password-stdin
@@ -22,7 +26,7 @@ build:
 deploy:
   stage: deploy
   tags:
-    - moreillon
+    - dind
   script:
     - envsubst < kubernetes_manifest.yml | kubectl apply -f -
     - kubectl rollout restart deployment/${APPLICATION_NAME}
