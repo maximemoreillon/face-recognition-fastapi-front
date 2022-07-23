@@ -19,14 +19,14 @@ build:
     # Pushing the image to the registry
     - docker push ${DOCKER_IMAGE}
 
-deploy:
-  stage: deploy
-  tags:
-    - dind
-  script:
-    - envsubst < kubernetes_manifest.yml | kubectl apply -f -
-    - kubectl rollout restart deployment/${APPLICATION_NAME}
-  environment:
-    name: production
-    kubernetes:
-      namespace: ${KUBERNETES_NAMESPACE}
+# deploy:
+#   stage: deploy
+#   tags:
+#     - dind
+#   script:
+#     - envsubst < kubernetes_manifest.yml | kubectl apply -f -
+#     - kubectl rollout restart deployment/${APPLICATION_NAME}
+#   environment:
+#     name: production
+#     kubernetes:
+#       namespace: ${KUBERNETES_NAMESPACE}
