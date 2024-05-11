@@ -1,11 +1,10 @@
 variables:
   APPLICATION_NAME: face-recognition-fastapi-front
   DOCKER_IMAGE: ${DOCKER_HUB_USERNAME}/${APPLICATION_NAME}
-  K8S_INGRESS_HOST: faces.home.maximemoreillon.com
 
 image: moreillon/ci-dind
 services:
-  - name: docker:19.03.12-dind
+  - name: docker:24.0.7-dind
 
 build:
   stage: build
@@ -18,15 +17,3 @@ build:
     - docker build -t ${DOCKER_IMAGE} .
     # Pushing the image to the registry
     - docker push ${DOCKER_IMAGE}
-
-# deploy:
-#   stage: deploy
-#   tags:
-#     - dind
-#   script:
-#     - envsubst < kubernetes_manifest.yml | kubectl apply -f -
-#     - kubectl rollout restart deployment/${APPLICATION_NAME}
-#   environment:
-#     name: production
-#     kubernetes:
-#       namespace: ${KUBERNETES_NAMESPACE}
